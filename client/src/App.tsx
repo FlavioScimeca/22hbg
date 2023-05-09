@@ -67,14 +67,14 @@ function TaskPost() {
 function TaskPostFiltered() {
   const [title, setTitle] = useState<string>('');
   const [items, setItems] = useState<string>('');
-  const [post, setPost] = useState<Array<Array<Post>>>([]);
+  const [post, setPost] = useState<Array<Post>>();
   const [message, setMessage] = useState<string>('');
 
   const fetchPostFiltered = (
     ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     ev.preventDefault();
-    console.log('clickkato');
+
     const condition = [
       title.trim() != '',
       title != null,
@@ -95,7 +95,7 @@ function TaskPostFiltered() {
     )
       .then((res) => res.json())
       .then((resp: Array<Post>) => {
-        setPost([resp]);
+        setPost(resp);
         console.log(post);
       })
       .catch((err) => {
@@ -110,7 +110,8 @@ function TaskPostFiltered() {
 
   useEffect(() => {
     console.log(post);
-  }, []);
+    console.log('renderizzato');
+  }, [post]);
   return (
     <>
       <section className="p-3">
@@ -156,8 +157,8 @@ function TaskPostFiltered() {
           )}
         </div>
         <div>
-          {post.length > 0 ? (
-            post[0].map((el, idx) => (
+          {post != undefined && post.length > 0 ? (
+            post.map((el, idx) => (
               <div
                 dangerouslySetInnerHTML={{ __html: el.title.rendered }}
                 key={idx}
