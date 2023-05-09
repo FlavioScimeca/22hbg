@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import { Post } from '../interface';
 
 const app = express();
 
@@ -16,10 +17,10 @@ app.get('/posts-filtered', (req: Request, res: Response) => {
 
   fetch(`https://22hbg.com/wp-json/wp/v2/posts/`)
     .then((res) => res.json())
-    .then((response: Array<Object>) =>
+    .then((response: Array<Post>) =>
       res.send(
         response
-          .filter((data: any) => data.title.rendered.includes(t))
+          .filter((data: Post) => data.title.rendered.includes(t))
           .splice(0, n ?? response.length - 1)
       )
     );
