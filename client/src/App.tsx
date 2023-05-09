@@ -9,7 +9,7 @@ function App() {
       .then((res) => res.json())
       .then((resp) => {
         setData([...data, resp]);
-        console.log(data);
+        // console.log(data);
       })
       .catch((err) => console.log(err));
   };
@@ -19,7 +19,7 @@ function App() {
   }, []);
   return (
     <>
-      <h2>api</h2>
+      <h2 className="p-2 bg-emerald-400 text-3xl">api</h2>
       {data.length > 0 ? (
         data[0].map((el: Post, idx: number) => (
           <div key={idx}>
