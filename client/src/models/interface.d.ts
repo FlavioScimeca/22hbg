@@ -24,6 +24,10 @@ export interface Post {
   title: { rendered: string };
   type: string;
   yoast_head: string;
-  yoast_head_json: { title: string };
+  yoast_head_json: {
+    title: string;
+    description: string;
+    og_image: [{ width: number; height: number; url: string; type: string }];
+  };
   _links: object;
 }
