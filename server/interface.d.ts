@@ -1,5 +1,7 @@
 //! Ho impostato la struttura del dato cosi da sfruttare al meglio TS (ed avere i suggerimenti eheheh)
 
+import { Request } from 'express';
+
 export interface Post {
   author: number;
   categories: Array<number>;
@@ -26,4 +28,11 @@ export interface Post {
   yoast_head: string;
   yoast_head_json: { title: string };
   _links: object;
+}
+
+export interface CustomReq extends Request {
+  query: {
+    title: string;
+    items: string;
+  };
 }
