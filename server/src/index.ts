@@ -2,6 +2,17 @@ import express, { Request, Response } from 'express';
 import { Post, CustomReq } from '../interface';
 
 const app = express();
+const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config();
+
+app.use(cors('*'));
+
+let port = process.env.PORT || 400;
+
+app.get('/', (req, res) => {
+  res.send('ok!');
+});
 
 //! creo un endpoint da richiamare lato client che ritorna i dati di quell API (uso una GET)
 app.get('/posts', (req: Request, res: Response) => {
@@ -27,6 +38,8 @@ app.get('/posts-filtered', (req: CustomReq, res: Response) => {
   console.log(title + '-' + items);
 });
 
-app.listen(4000, () => {
-  console.log('running on 4000');
+app.listen(port, () => {
+  console.log(`running on port ${port}`);
 });
+
+module.exports = app;
