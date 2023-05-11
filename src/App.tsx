@@ -25,8 +25,7 @@ function TaskPost() {
         <span>
           <a href="https://github.com/FlavioScimeca/22hbg" target="blank">
             Repo Github
-          </a>{' '}
-          m
+          </a>
         </span>
       </header>
       <main>
@@ -158,14 +157,24 @@ function TaskPostFiltered() {
         </div>
         <div>
           {post != undefined && post.length > 0 ? (
-            post.map((el, idx) => (
-              <div
-                dangerouslySetInnerHTML={{ __html: el.title.rendered }}
-                key={idx}
-              ></div>
-            ))
+            <div className="mx-auto max-w-5xl grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5  gap-3">
+              {post.map((el: Post, idx) => (
+                <a key={idx} href={el.link} target="blank">
+                  <div className=" cursor-pointer shadow-lg p-2 rounded-lg bg-slate-300 m-2">
+                    <h3
+                      className="text-center font-semibold  line-clamp-2"
+                      dangerouslySetInnerHTML={{ __html: el.title.rendered }}
+                    ></h3>
+                    <div
+                      className=" line-clamp-4 mt-3 font-extralight"
+                      dangerouslySetInnerHTML={{ __html: el.content.rendered }}
+                    />
+                  </div>
+                </a>
+              ))}
+            </div>
           ) : (
-            <div>cerca qualcosa!</div>
+            <div className="text-center text-2xl">cerca qualcosa!</div>
           )}
         </div>
       </section>
