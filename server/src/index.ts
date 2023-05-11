@@ -8,7 +8,7 @@ dotenv.config();
 
 app.use(cors());
 
-const port = process.env.PORT || 400;
+const port = process.env.PORT || 4000;
 
 app.get('/', (_req, res) => {
   res.send('ok!');
@@ -25,7 +25,8 @@ app.get('/test', (_req, res) => {
 app.get('/posts', (_req: Request, res: Response) => {
   fetch('https://22hbg.com/wp-json/wp/v2/posts/')
     .then((res) => res.json())
-    .then((response) => res.send(response));
+    .then((response) => res.send(response))
+    .catch((err) => console.log(err));
 });
 
 //! per ora i valori sono statici poi li faro passare dal req.body (voglio capire se posso filtrarli direttamente dalla query)
@@ -41,7 +42,8 @@ app.get('/posts-filtered', (req: CustomReq, res: Response) => {
           .filter((data: Post) => data.title.rendered.includes(title))
           .splice(0, +items ?? response.length - 1)
       )
-    );
+    )
+    .catch((err) => console.log(err));
   console.log(title + '-' + items);
 });
 
