@@ -10,11 +10,17 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 app.use((0, cors_1.default)());
 const port = process.env.PORT || 400;
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
     res.send('ok!');
 });
+app.get('/test', (_req, res) => {
+    res.send({
+        title: 'test1',
+        body: 'body1',
+    });
+});
 //! creo un endpoint da richiamare lato client che ritorna i dati di quell API (uso una GET)
-app.get('/posts', (req, res) => {
+app.get('/posts', (_req, res) => {
     fetch('https://22hbg.com/wp-json/wp/v2/posts/')
         .then((res) => res.json())
         .then((response) => res.send(response));
