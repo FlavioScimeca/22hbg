@@ -42,7 +42,7 @@ app.get('/posts', async (_req: Request, res: Response) => {
 
 //! per ora i valori sono statici poi li faro passare dal req.body (voglio capire se posso filtrarli direttamente dalla query)
 //* ho creato CustomReq per tipizzare {title , items} se no l'includes() e lo splice() non li accettavano
-app.get('/posts-filtered', async (req: CustomReq, res: Response) => {
+app.post('/posts-filtered', async (req: CustomReq, res: Response) => {
   const { title, items } = req.query;
 
   try {
