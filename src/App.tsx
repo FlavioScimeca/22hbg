@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Post } from './models/interface';
 
-function TaskPost() {
+const TaskPost: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
 
   const fetchApi = () => {
-    fetch(`${import.meta.env.VITE_URL_KEY}/posts`)
+    fetch(`${import.meta.env.VITE_URL_KEY}/posts`, { method: 'GET' })
       .then((res) => res.json())
       .then((resp) => {
         setData([...data, resp]);
@@ -61,7 +61,7 @@ function TaskPost() {
       </main>
     </>
   );
-}
+};
 
 function TaskPostFiltered() {
   const [title, setTitle] = useState<string>('');
@@ -90,12 +90,12 @@ function TaskPostFiltered() {
     fetch(
       `${
         import.meta.env.VITE_URL_KEY
-      }/posts-filtered/?title=${title}&items=${items}`
+      }/posts-filtered/?title=${title}&items=${items}`,
+      { method: 'POST' }
     )
       .then((res) => res.json())
       .then((resp: Array<Post>) => {
         setPost(resp);
-        console.log(post);
       })
       .catch((err) => {
         console.log(err);
@@ -109,7 +109,6 @@ function TaskPostFiltered() {
 
   useEffect(() => {
     console.log(post);
-    console.log('renderizzato');
   }, [post]);
   return (
     <>
@@ -135,7 +134,7 @@ function TaskPostFiltered() {
               <input
                 value={items}
                 id="items"
-                type="text"
+                type="number"
                 onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
                   setItems(ev.target.value)
                 }
